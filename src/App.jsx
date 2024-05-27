@@ -1,5 +1,6 @@
 import { Post } from './Post'
 import { Header } from './components/Header'
+import styles from './App.module.css'
 
 export function App() {
 
@@ -7,10 +8,21 @@ export function App() {
     <div>
       <Header />
   
-      <Post 
-        author="Paulo Nobre" 
-        content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim maiores corrupti facere error, placeat eius rem aliquid tenetur quam aperiam quod ipsam cumque consequuntur saepe sapiente expedita, sequi libero? Tempore?" 
-      />
+      <div className={styles.wrapper}>
+        <aside>sidebar</aside>
+        
+        <main>
+          <Post 
+            author="João Gomes"
+            content= "Um texto muito legal, como primeiro post, aprendendo sobre reactjs." 
+          /> 
+          <Post 
+            author="Fernanda Silva"
+            content= "Um texto muito legal, como segundo post, aprendendo sobre reactjs."
+          /> 
+        </main>
+        
+      </div>
     </div>
   )
 }

@@ -23,6 +23,16 @@ export function Post(props) {
         <p><a href="#">#web #novoprojero #react</a></p>
       </div>
 
+      <form className={styles.commentForm}>
+        <strong>Deixe seu feedback</strong>
+        <textarea placeholder='Deixe um comentário' />
+
+        <footer>
+          <button type='submit'>Comentar</button>
+        </footer>
+          
+      </form>
+
     </article>
   )
 }

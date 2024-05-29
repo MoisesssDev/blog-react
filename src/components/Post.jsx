@@ -1,3 +1,4 @@
+import { Comment } from './Comment';
 import avatar from '../assets/foto-perfil.png';
 import styles from './Post.module.css'
 
@@ -10,7 +11,7 @@ export function Post(props) {
           <div className={styles.authorInfo}>
             <strong>Moisés Almeida</strong>
             <span>Web Developer</span>
-          </div>
+         </div>
         </div>
 
         <time title='28 de Maio às 12:32h' dateTime='2024-05-28 12:32:00' >Publicado há 1h</time>
@@ -32,6 +33,14 @@ export function Post(props) {
         </footer>
           
       </form>
+
+      <div className={styles.commentList}>
+        <Comment />
+        <Comment />
+        <Comment />
+        <Comment />
+        <Comment />
+      </div>
 
     </article>
   )

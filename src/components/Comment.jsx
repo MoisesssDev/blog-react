@@ -1,4 +1,3 @@
-
 import { ThumbsUp, Trash } from 'phosphor-react';
 import avatar from '../assets/foto-perfil.png';
 import styles from './Comment.module.css';
@@ -18,7 +17,7 @@ export function Comment() {
 
 
             <button title='Remover comentário'>
-              <Trash size={20} />
+              <Trash size={24} />
             </button>
           </header>
           

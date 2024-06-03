@@ -1,27 +1,42 @@
+import { format, formatDistanceToNow } from 'date-fns';
+import ptBR from 'date-fns/locale/pt-BR';
 import { Comment } from './Comment';
 import styles from './Post.module.css'
 import { Avatar } from './Avatar';
 
-export function Post(props) {
+
+export function Post({ author, publishedAt, content}) {
+  const dateFormatted = format(publishedAt, "dd 'de' MMM yyyy 'ás' HH:mm'h'", {locale: ptBR});
+  const dateRelative = formatDistanceToNow(publishedAt, {
+    locale: ptBR,
+    addSuffix: 'Há'
+  });
+  
   return (
+
     <article className={styles.post}>
       <header>
         <div className={styles.author}>
-          < Avatar src="https://avatars.githubusercontent.com/u/92608807?v=4" />
+          < Avatar src={author.avatarUrl} />
           <div className={styles.authorInfo}>
-            <strong>Moisés Almeida</strong>
-            <span>Web Developer</span>
+            <strong>{author.name}</strong>
+            <span>{author.role}</span>
          </div>
         </div>
 
-        <time title='28 de Maio às 12:32h' dateTime='2024-05-28 12:32:00' >Publicado há 1h</time>
+        <time title={dateFormatted} dateTime={publishedAt.toISOString()} >
+          {dateRelative} 
+        </time>
       </header>
 
       <div className={styles.content}>
-        <p>Fala galera!</p>
-        <p>Acabei de subir mais um projeto no meu portifolio.</p>
-        <p>Aqui tá o link: <a href="#">moises.dev/projeto</a></p>
-        <p><a href="#">#web #novoprojero #react</a></p>
+        {content.map(item => {
+          if (item.type === 'paragraph') {
+            return <p>{item.content}</p>
+          } else if (item.type === 'link') {
+            return <p><a href='#' >{item.content}</a></p>
+          }
+        })}
       </div>
 
       <form className={styles.commentForm}>

@@ -14,12 +14,21 @@ export function Post({ author, publishedAt, content}) {
     addSuffix: 'Há'
   });
 
-  const [comments, setComments] = useState([1, 2]);
+  const [newComment, setNewComment] = useState('');
+
+  const [comments, setComments] = useState([
+    'Post muito bacana!!'
+  ]);
   
   function createComment() {
     event.preventDefault()
 
-    setComments([...comments, comments.length + 1]);
+    setComments([...comments, newComment]);
+    setNewComment('');
+  }
+
+  function handleComment(event) {
+    setNewComment(event.target.value);
   }
 
   return (
@@ -42,16 +51,21 @@ export function Post({ author, publishedAt, content}) {
       <div className={styles.content}>
         {content.map(item => {
           if (item.type === 'paragraph') {
-            return <p>{item.content}</p>
+            return <p key={item.content}>{item.content}</p>
           } else if (item.type === 'link') {
-            return <p><a href='#' >{item.content}</a></p>
+            return <p key={item.content}><a href='#' >{item.content}</a></p>
           }
         })}
       </div>
 
       <form onSubmit={createComment} className={styles.commentForm}>
         <strong>Deixe seu feedback</strong>
-        <textarea placeholder='Deixe um comentário' />
+        <textarea 
+          name='comment' 
+          placeholder='Deixe um comentário' 
+          onChange={handleComment}
+          value={newComment}
+        />
 
         <footer>
           <button type='submit'>Comentar</button>
@@ -61,7 +75,10 @@ export function Post({ author, publishedAt, content}) {
 
       <div className={styles.commentList}>
         {comments.map(comment => {
-          return <Comment  />
+          return <Comment 
+            content={comment} 
+            key={comment}
+          />
         })}
       </div>
 
